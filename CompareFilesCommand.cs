@@ -13,7 +13,7 @@ namespace CompareFilesVS2017
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class CompareFilesCommand : CompareFilesCommandBase
+    public sealed class CompareFilesCommand : CompareFilesCommandBase
     {
         /// <summary>
         /// Command ID.

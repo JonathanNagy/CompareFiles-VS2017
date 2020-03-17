@@ -16,9 +16,6 @@ namespace CompareFilesVS2017
     /// </summary>
     internal sealed class ConfigureCompareFilesCommand
     {
-        private string compareToolPath = @"%PROGRAMFILES(X86)%\Beyond Compare 4\BCompare.exe";
-        private const string settingsFilePath = @"%USERPROFILE%\AppData\Local\CompareFilesAddIn\CompareFiles.conf";
-
         /// <summary>
         /// Command ID.
         /// </summary>
@@ -105,58 +102,19 @@ namespace CompareFilesVS2017
         /// </summary>
         private void ShowCompareFilesConfigurationWindow(object sender, EventArgs e)
         {
-            LoadCompareToolPath();
+            CompareToolConfiguration.LoadCompareToolConfiguration();
 
-            using (var dialog = new ConfigurationDialog(compareToolPath))
+            using (var dialog = new ConfigurationDialog())
             {
                 DialogResult result = dialog.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
-                    StoreCompareToolPath(dialog.ToolPath);
+                    CompareToolConfiguration.StoreCompareToolConfiguration(dialog.Configuration);
                 }
             }
         }
 
-        private void LoadCompareToolPath()
-        {
-            FileInfo settingsFile = new FileInfo(Environment.ExpandEnvironmentVariables(settingsFilePath));
-            if (settingsFile.Exists)
-            {
-                using (FileStream fileStream = settingsFile.OpenRead())
-                {
-                    TextReader reader = new StreamReader(fileStream);
-                    var storedCompareToolPath = reader.ReadLine();
-                    if (!String.IsNullOrWhiteSpace(storedCompareToolPath))
-                    {
-                        compareToolPath = storedCompareToolPath;
-                    }
-                }
-            }
-        }
-
-        private void StoreCompareToolPath(string newToolPath)
-        {
-            FileInfo file = new FileInfo(Environment.ExpandEnvironmentVariables(settingsFilePath));
-            if (!file.Directory.Exists)
-                file.Directory.Create();
-
-            FileStream fileStream = null;
-            try
-            {
-                fileStream = file.Create();
-                using (TextWriter writer = new StreamWriter(fileStream))
-                {
-                    fileStream = null;
-                    writer.WriteLine(newToolPath);
-                }
-            }
-            finally
-            {
-                if (fileStream != null)
-                    fileStream.Dispose();
-            }
-        }
 
     }
 }

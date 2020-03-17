@@ -12,26 +12,21 @@ namespace CompareFilesVS2017
 {
     public partial class ConfigurationDialog : Form
     {
-        private string toolPath;
+        private CompareToolConfiguration configuration;
 
         public ConfigurationDialog()
         {
             InitializeComponent();
+
+            txtFilePath.Text = CompareToolConfiguration.ExecutablePath;
+            txtExtraArguments.Text = CompareToolConfiguration.ExtraArugments;
         }
         
-        public ConfigurationDialog(string currentPath)
-        {
-            InitializeComponent();
-
-            toolPath = currentPath;
-            txtFilePath.Text = currentPath;
-        }
-
-        public string ToolPath
+        public CompareToolConfiguration Configuration
         {
             get
             {
-                return toolPath;
+                return configuration;
             }
         }
 
@@ -53,7 +48,11 @@ namespace CompareFilesVS2017
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            toolPath = txtFilePath.Text;
+            configuration = new CompareToolConfiguration()
+            {
+                CompareToolExecutablePath = txtFilePath.Text,
+                CompareToolExtraArguments = txtExtraArguments.Text
+            };
             DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
