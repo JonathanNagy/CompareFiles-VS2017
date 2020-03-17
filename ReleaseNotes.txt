@@ -1,4 +1,4 @@
-﻿Version 0.43 - 03/17/2020
+﻿Version 0.44 - 03/17/2020
 
 * Recreated VSIX project for VS2017 version
 

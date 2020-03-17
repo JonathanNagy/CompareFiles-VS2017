@@ -71,6 +71,8 @@ namespace CompareFilesVS2017
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await ConfigureCompareFilesCommand.InitializeAsync(this);
             await CompareFilesCommand.InitializeAsync(this);
+            await CompareFilesWebCommand.InitializeAsync(this);
+            await CompareFilesMultiCommand.InitializeAsync(this);
         }
 
         #endregion
