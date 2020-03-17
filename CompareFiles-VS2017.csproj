@@ -69,6 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
@@ -78,6 +79,7 @@
   <ItemGroup>
     <VSCTCompile Include="ConfigureCompareFilesCommandPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
     <Content Include="CompareFilesScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
